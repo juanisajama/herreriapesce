@@ -19,6 +19,11 @@ export function formatARS(n: number) {
   return "$" + Math.round(n).toLocaleString("es-AR");
 }
 
+export function formatOrderPrice(price: number, delivery: DeliveryMode) {
+  const formattedPrice = formatARS(price);
+  return delivery === "envio" ? `${formattedPrice} + ENVÍO` : formattedPrice;
+}
+
 export function depositAmount(price: number, percent: number) {
   return Math.round((price * percent) / 100);
 }
@@ -59,7 +64,7 @@ export function buildWhatsAppMessage(args: {
     `• Producto: ${args.productName}`,
     `• Fecha de entrega/retiro: ${fecha}`,
     `• Modalidad: ${DELIVERY_LABELS[args.delivery]}`,
-    `• Precio: ${formatARS(args.price)}`,
+    `• Precio: ${formatOrderPrice(args.price, args.delivery)}`,
     `• Seña a transferir (${args.depositPercent}%): ${formatARS(sena)}`,
     args.delivery === "envio" ? "Quedo atento al costo del envío según mi zona." : "",
     "¿Me pasan los datos para transferir? ¡Gracias!",

@@ -6,7 +6,7 @@ import { ArrowLeft, Store, Truck, MessageCircle } from "lucide-react";
 import { getProduct } from "@/data/products";
 import { blockedRangesQuery } from "@/lib/queries";
 import {
-  DELIVERY_LABELS, buildWhatsAppMessage, depositAmount, formatARS, isDateBlocked, whatsappUrl,
+  DELIVERY_LABELS, buildWhatsAppMessage, depositAmount, formatARS, formatOrderPrice, isDateBlocked, whatsappUrl,
   type DeliveryMode,
 } from "@/lib/booking";
 import { Calendar } from "@/components/ui/calendar";
@@ -139,7 +139,7 @@ function ProductPage() {
                 <Row k="Producto" v={product.name} />
                 <Row k="Fecha" v={date.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })} />
                 <Row k="Modalidad" v={DELIVERY_LABELS[delivery]} />
-                <Row k="Precio" v={formatARS(product.price)} />
+                <Row k="Precio" v={formatOrderPrice(product.price, delivery)} />
                 <div className="flex justify-between border-t border-border pt-3 text-base">
                   <dt className="font-bold">Seña a transferir ({product.depositPercent}%)</dt>
                   <dd className="font-display text-2xl text-fire">{formatARS(sena)}</dd>

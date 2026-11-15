@@ -36,4 +36,9 @@ describe("booking rules", () => {
     expect(msg).toContain("36.000");
     expect(whatsappUrl(msg).startsWith("https://wa.me/5491165961753?text=")).toBe(true);
   });
+  it("shows shipping as an extra charge in the reservation price", () => {
+    const msg = buildWhatsAppMessage({ productName: "Parrilla", date: new Date(2026, 11, 10), delivery: "envio", price: 180000, depositPercent: 20 });
+    expect(msg).toContain("• Precio: $180.000 + ENVÍO");
+    expect(msg).toContain("• Seña a transferir (20%): $36.000");
+  });
 });
