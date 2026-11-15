@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { depositAmount, isDateBlocked, buildWhatsAppMessage, whatsappUrl } from "./booking";
-import { getProduct } from "@/data/products";
+import { depositAmount, isDateBlocked, buildProductInquiryMessage, buildWhatsAppMessage, whatsappUrl } from "./booking";
+import { getOriginalPrice, getProduct, PRODUCTS } from "@/data/products";
 
 describe("booking rules", () => {
   it("accessories require 10% deposit", () => {
@@ -21,6 +21,12 @@ describe("booking rules", () => {
     expect(getProduct("barra-ejercicio")!.soldOut).toBe(true);
     expect(getProduct("soporte-bici")!.soldOut).toBeFalsy();
   });
+  it("shows a 50% discount for every product", () => {
+    for (const product of PRODUCTS) {
+      expect(product.discountPercent).toBe(50);
+      expect(getOriginalPrice(product)).toBe(product.price * 2);
+    }
+  });
   it("blocks dates inside a product range and global ranges", () => {
     const ranges = [
       { id: "1", product_id: "soporte-bici", start_date: "2026-12-01", end_date: "2026-12-05", reason: null },
@@ -40,5 +46,13 @@ describe("booking rules", () => {
     const msg = buildWhatsAppMessage({ productName: "Parrilla", date: new Date(2026, 11, 10), delivery: "envio", price: 180000, depositPercent: 20 });
     expect(msg).toContain("• Precio: $180.000 + ENVÍO");
     expect(msg).toContain("• Seña a transferir (20%): $36.000");
+  });
+  it("builds a WhatsApp product inquiry without reservation dates or deposits", () => {
+    const msg = buildProductInquiryMessage({ productName: "Parrilla", delivery: "envio", price: 180000 });
+    expect(msg).toContain("• Producto: Parrilla");
+    expect(msg).toContain("• Modalidad: Envío a domicilio (desde $15.000 ARS en AMBA)");
+    expect(msg).toContain("• Precio: $180.000 + ENVÍO");
+    expect(msg).not.toContain("Fecha");
+    expect(msg).not.toContain("Seña");
   });
 });

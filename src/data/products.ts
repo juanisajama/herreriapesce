@@ -13,6 +13,7 @@ export type Product = {
   capacity: string;
   material: string;
   price: number;
+  discountPercent: number;
   depositPercent: number;
   soldOut?: boolean;
 };
@@ -27,6 +28,7 @@ export const PRODUCTS: Product[] = [
     capacity: "Hasta 15 kg c/u",
     material: "Hierro macizo 10 mm, pintura epoxi negra",
     price: 20000,
+    discountPercent: 50,
     depositPercent: 10,
   },
   {
@@ -38,6 +40,7 @@ export const PRODUCTS: Product[] = [
     capacity: "Para 15 a 20 personas",
     material: "Tambor 200 L, hierro ángulo y varilla 8 mm",
     price: 180000,
+    discountPercent: 50,
     depositPercent: 20,
   },
   {
@@ -49,6 +52,7 @@ export const PRODUCTS: Product[] = [
     capacity: "Hasta 25 kg",
     material: "Caño estructural 20×20, placa 4 mm",
     price: 35000,
+    discountPercent: 50,
     depositPercent: 10,
   },
   {
@@ -60,6 +64,7 @@ export const PRODUCTS: Product[] = [
     capacity: "Hasta 80 kg",
     material: "Caño estructural 40×40, placa 6 mm",
     price: 50000,
+    discountPercent: 50,
     depositPercent: 10,
   },
   {
@@ -71,9 +76,13 @@ export const PRODUCTS: Product[] = [
     capacity: "Hasta 150 kg",
     material: "Caño 1\" pared gruesa, placas 6 mm",
     price: 120000,
+    discountPercent: 50,
     depositPercent: 10,
     soldOut: true,
   },
 ];
 
 export const getProduct = (id: string) => PRODUCTS.find((p) => p.id === id);
+
+export const getOriginalPrice = (product: Product) =>
+  Math.round(product.price / (1 - product.discountPercent / 100));

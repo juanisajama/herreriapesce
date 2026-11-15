@@ -73,6 +73,23 @@ export function buildWhatsAppMessage(args: {
     .join("\n");
 }
 
+export function buildProductInquiryMessage(args: {
+  productName: string;
+  delivery: DeliveryMode;
+  price: number;
+}) {
+  return [
+    "¡Hola Herrería Pesce! Quiero consultar por:",
+    `• Producto: ${args.productName}`,
+    `• Modalidad: ${DELIVERY_LABELS[args.delivery]}`,
+    `• Precio: ${formatOrderPrice(args.price, args.delivery)}`,
+    args.delivery === "envio"
+      ? "¿Me confirman disponibilidad y costo del envío para mi zona?"
+      : "¿Me confirman disponibilidad?",
+    "¡Gracias!",
+  ].join("\n");
+}
+
 export function whatsappUrl(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Ruler, Weight, Wrench } from "lucide-react";
-import type { Product } from "@/data/products";
+import { getOriginalPrice, type Product } from "@/data/products";
 import { formatARS } from "@/lib/booking";
 import { Button } from "@/components/ui/button";
 
@@ -10,7 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="relative aspect-[4/3] overflow-hidden">
         <img src={product.image} alt={product.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         <span className="absolute left-3 top-3 rounded-sm bg-fire px-2 py-1 text-xs font-bold uppercase text-primary-foreground">
-          Seña {product.depositPercent}%
+          {product.discountPercent}% OFF
         </span>
         {product.soldOut && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/70">
@@ -29,13 +29,16 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="mt-auto flex items-end justify-between border-t border-border pt-4">
           <div>
             <p className="text-xs uppercase text-muted-foreground">Precio</p>
-            <p className="font-display text-3xl text-fire">{formatARS(product.price)}</p>
+            <div className="flex flex-wrap items-baseline gap-x-2">
+              <p className="font-display text-3xl text-fire">{formatARS(product.price)}</p>
+              <del className="text-sm text-muted-foreground">{formatARS(getOriginalPrice(product))}</del>
+            </div>
           </div>
           {product.soldOut ? (
             <Button disabled variant="secondary" className="font-bold uppercase">Sin stock</Button>
           ) : (
             <Button asChild className="bg-fire font-bold uppercase text-primary-foreground">
-              <Link to="/producto/$id" params={{ id: product.id }}>Reservar</Link>
+              <Link to="/producto/$id" params={{ id: product.id }}>Ver producto</Link>
             </Button>
           )}
         </div>
