@@ -34,3 +34,12 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## Deploy to Cloudflare
+
+The app is built as a Cloudflare Worker with Nitro. In Cloudflare Workers Builds, connect this repository and use:
+
+- Build command: `npm run build`
+- Deploy command: `npx nitro deploy --prebuilt`
+
+Nitro generates the Worker configuration at `.output/server/wrangler.json`. Configure these build variables for the browser bundle: `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Add these runtime variables/secrets to the Worker: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_PASSWORD`, and `SESSION_SECRET`. Keep secret values in Cloudflare, not in Git.
