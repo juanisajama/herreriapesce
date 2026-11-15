@@ -34,7 +34,7 @@ export const PRODUCTS: Product[] = [
     name: "Parrilla tambor chulengo",
     image: chulengo,
     short: "Chulengo de tambor con tapa, parrilla y patas reforzadas.",
-    dimensions: "90 × 60 × 100 cm",
+    dimensions: "120 × 60 × 120 cm",
     capacity: "Para 15 a 20 personas",
     material: "Tambor 200 L, hierro ángulo y varilla 8 mm",
     price: 180000,
