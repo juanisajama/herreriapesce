@@ -62,9 +62,15 @@ describe("booking rules", () => {
     expect(msg).toContain("• Seña a transferir (20%): $36.000");
   });
   it("builds a WhatsApp product inquiry without reservation dates or deposits", () => {
-    const msg = buildProductInquiryMessage({ productName: "Parrilla", delivery: "envio", price: 180000 });
+    const msg = buildProductInquiryMessage({
+      productName: "Parrilla",
+      delivery: "envio",
+      price: 180000,
+      city: "  San Martín  ",
+    });
     expect(msg).toContain("• Producto: Parrilla");
     expect(msg).toContain("• Modalidad: Envío a domicilio (desde $15.000 ARS en AMBA)");
+    expect(msg).toContain("• Ciudad: San Martín");
     expect(msg).toContain("• Precio: $180.000 + ENVÍO");
     expect(msg).not.toContain("Fecha");
     expect(msg).not.toContain("Seña");

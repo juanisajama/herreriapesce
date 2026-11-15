@@ -75,13 +75,17 @@ export function buildWhatsAppMessage(args: {
 
 export function buildProductInquiryMessage(args: {
   productName: string;
-  delivery: DeliveryMode;
   price: number;
-}) {
+} & ({ delivery: "retiro" } | { delivery: "envio"; city: string })) {
+  if (args.delivery === "envio" && !args.city.trim()) {
+    throw new Error("La ciudad es obligatoria para el envío.");
+  }
+
   return [
     "¡Hola Herrería Pesce! Quiero consultar por:",
     `• Producto: ${args.productName}`,
     `• Modalidad: ${DELIVERY_LABELS[args.delivery]}`,
+    args.delivery === "envio" ? `• Ciudad: ${args.city.trim()}` : "",
     `• Precio: ${formatOrderPrice(args.price, args.delivery)}`,
     args.delivery === "envio"
       ? "¿Me confirman disponibilidad y costo del envío para mi zona?"

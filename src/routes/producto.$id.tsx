@@ -11,6 +11,8 @@ import {
   type DeliveryMode,
 } from "@/lib/booking";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/producto/$id")({
@@ -47,6 +49,26 @@ function ProductPage() {
   const { id } = Route.useParams();
   const product = getProduct(id)!;
   const [delivery, setDelivery] = useState<DeliveryMode>();
+  const [city, setCity] = useState("");
+  const inquiryUrl =
+    delivery === "envio" && city.trim()
+      ? whatsappUrl(
+          buildProductInquiryMessage({
+            productName: product.name,
+            delivery,
+            price: product.price,
+            city: city.trim(),
+          }),
+        )
+      : delivery === "retiro"
+        ? whatsappUrl(
+            buildProductInquiryMessage({
+              productName: product.name,
+              delivery,
+              price: product.price,
+            }),
+          )
+        : undefined;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -133,6 +155,20 @@ function ProductPage() {
                   );
                 })}
               </div>
+              {delivery === "envio" && (
+                <div className="mt-4 space-y-2">
+                  <Label htmlFor="shipping-city">Ciudad</Label>
+                  <Input
+                    id="shipping-city"
+                    value={city}
+                    onChange={(event) => setCity(event.target.value)}
+                    placeholder="Ej. San Martín"
+                    autoComplete="address-level2"
+                    maxLength={100}
+                    required
+                  />
+                </div>
+              )}
               {delivery && (
                 <p className="mt-4 flex justify-between gap-4 border-t border-border pt-4 text-sm">
                   <span>Precio</span>
@@ -141,20 +177,14 @@ function ProductPage() {
               )}
             </section>
 
-            {delivery ? (
+            {inquiryUrl ? (
               <Button
                 asChild
                 size="lg"
                 className="w-full bg-whatsapp py-6 text-lg font-bold uppercase text-whatsapp-foreground hover:bg-whatsapp/90"
               >
                 <a
-                  href={whatsappUrl(
-                    buildProductInquiryMessage({
-                      productName: product.name,
-                      delivery,
-                      price: product.price,
-                    }),
-                  )}
+                  href={inquiryUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -163,7 +193,7 @@ function ProductPage() {
               </Button>
             ) : (
               <Button size="lg" disabled className="w-full py-6 text-lg font-bold uppercase">
-                Elegí retiro o envío
+                {delivery === "envio" ? "Ingresá tu ciudad" : "Elegí retiro o envío"}
               </Button>
             )}
           </div>
