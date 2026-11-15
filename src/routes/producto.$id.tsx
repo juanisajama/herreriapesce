@@ -61,8 +61,8 @@ function ProductPage() {
           <img
             src={product.image}
             alt={product.name}
-            width={1024}
-            height={768}
+            width={1200}
+            height={896}
             className="w-full rounded-md border border-border object-cover"
           />
           <h1 className="mt-6 text-5xl">{product.name}</h1>

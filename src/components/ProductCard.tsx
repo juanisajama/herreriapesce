@@ -8,7 +8,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="plate group flex flex-col overflow-hidden rounded-md transition hover:border-primary hover:shadow-fire">
       <div className="relative aspect-[4/3] overflow-hidden">
-        <img src={product.image} alt={product.name} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        <img src={product.image} alt={product.name} loading="lazy" width={1200} height={896} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         <span className="absolute left-3 top-3 rounded-sm bg-fire px-2 py-1 text-xs font-bold uppercase text-primary-foreground">
           {product.discountPercent}% OFF
         </span>

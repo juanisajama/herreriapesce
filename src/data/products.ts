@@ -1,8 +1,8 @@
-import ganchos from "@/assets/ganchos.jpg";
-import chulengo from "@/assets/chulengo.jpg";
-import bici from "@/assets/soporte-bici.jpg";
-import box from "@/assets/soporte-box.jpg";
-import barra from "@/assets/barra.jpg";
+import ganchos from "@/assets/ganchosnew.jfif";
+import chulengo from "@/assets/chulengonew.jfif";
+import bici from "@/assets/bicinew.jfif";
+import box from "@/assets/boxnew.jfif";
+import barra from "@/assets/barranew.jfif";
 
 export type Product = {
   id: string;
