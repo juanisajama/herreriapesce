@@ -17,6 +17,20 @@ describe("booking rules", () => {
   it("bolsa box support costs 50.000", () => {
     expect(getProduct("soporte-bolsa-box")!.price).toBe(50000);
   });
+  it("custom shelf brackets are sold as a pair for 18.000", () => {
+    const product = getProduct("mensulas-estante-x2")!;
+    expect(product.name).toBe("Ménsulas de hierro para estante x2");
+    expect(product.price).toBe(18000);
+    expect(product.dimensions).toBe("A medida, según pedido");
+    expect(product.discountPercent).toBe(50);
+  });
+  it("coffee table has the requested dimensions and 200.000 price", () => {
+    const product = getProduct("mesa-ratona-hierro")!;
+    expect(product.price).toBe(200000);
+    expect(product.dimensions).toBe("80 cm (ancho) × 50 cm (prof.) × 42 cm (alto)");
+    expect(product.material).toContain("tapa de chapa de acero reforzada de 1,2 mm");
+    expect(product.material).toContain("patas con regatones");
+  });
   it("exercise bar is sold out, others are not", () => {
     expect(getProduct("barra-ejercicio")!.soldOut).toBe(true);
     expect(getProduct("soporte-bici")!.soldOut).toBeFalsy();

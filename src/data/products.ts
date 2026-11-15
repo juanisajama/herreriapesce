@@ -3,6 +3,8 @@ import chulengo from "@/assets/chulengonew.jfif";
 import bici from "@/assets/bicinew.jfif";
 import box from "@/assets/boxnew.jfif";
 import barra from "@/assets/barranew.jfif";
+import mensulas from "@/assets/Gemini_Generated_Image_mo5r6pmo5r6pmo5r.jfif";
+import mesaRatona from "@/assets/Gemini_Generated_Image_v5lapnv5lapnv5la.jfif";
 
 export type Product = {
   id: string;
@@ -79,6 +81,30 @@ export const PRODUCTS: Product[] = [
     discountPercent: 50,
     depositPercent: 10,
     soldOut: true,
+  },
+  {
+    id: "mensulas-estante-x2",
+    name: "Ménsulas de hierro para estante x2",
+    image: mensulas,
+    short: "Par de ménsulas de hierro fabricadas a medida y por pedido para tu estante.",
+    dimensions: "A medida, según pedido",
+    capacity: "Consultar según pared e instalación",
+    material: "Hierro",
+    price: 18000,
+    discountPercent: 50,
+    depositPercent: 10,
+  },
+  {
+    id: "mesa-ratona-hierro",
+    name: "Mesa ratona de hierro",
+    image: mesaRatona,
+    short: "Mesa ratona de diseño industrial, sólida y firme, con tapa de acero reforzada y acabado epoxi al horno.",
+    dimensions: "80 cm (ancho) × 50 cm (prof.) × 42 cm (alto)",
+    capacity: "Estructura sólida y firme",
+    material: "Hierro estructural 20/20 de 1 mm, tapa de chapa de acero reforzada de 1,2 mm, pintura epoxi al horno y patas con regatones.",
+    price: 200000,
+    discountPercent: 50,
+    depositPercent: 10,
   },
 ];
 

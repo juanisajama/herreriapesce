@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Flame } from "lucide-react";
+import emblem from "@/assets/Emblema_pez-yunque_de_metal_incandescente-removebg-preview.png";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link to="/" className="flex items-center gap-2">
-          <Flame className="h-6 w-6 text-primary" />
+          <img src={emblem} alt="" aria-hidden="true" width={32} height={32} className="h-8 w-8 object-contain" />
           <span className="font-display text-2xl tracking-wider">
             HERRERÍA <span className="text-primary">PESCE</span>
           </span>
@@ -27,7 +27,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 text-sm text-muted-foreground md:grid-cols-3">
         <div>
           <p className="font-display text-xl text-foreground">HERRERÍA PESCE</p>
-          <p>Herrería artesanal · San Martín, Buenos Aires</p>
+          <p>Herrería artesanal · San Martín, Buenos Aires · 30 años de experiencia</p>
         </div>
         <div>
           <p className="font-semibold text-foreground">Contacto</p>
