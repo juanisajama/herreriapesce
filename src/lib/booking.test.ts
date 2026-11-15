@@ -5,11 +5,21 @@ import { getProduct } from "@/data/products";
 describe("booking rules", () => {
   it("accessories require 10% deposit", () => {
     expect(getProduct("ganchos-x3")!.depositPercent).toBe(10);
-    expect(depositAmount(18000, 10)).toBe(1800);
+    expect(getProduct("ganchos-x3")!.price).toBe(20000);
+    expect(depositAmount(20000, 10)).toBe(2000);
   });
-  it("chulengo requires 30% deposit", () => {
-    expect(getProduct("parrilla-chulengo")!.depositPercent).toBe(30);
-    expect(depositAmount(380000, 30)).toBe(114000);
+  it("chulengo costs 180.000 with 20% deposit", () => {
+    const p = getProduct("parrilla-chulengo")!;
+    expect(p.price).toBe(180000);
+    expect(p.depositPercent).toBe(20);
+    expect(depositAmount(p.price, p.depositPercent)).toBe(36000);
+  });
+  it("bolsa box support costs 50.000", () => {
+    expect(getProduct("soporte-bolsa-box")!.price).toBe(50000);
+  });
+  it("exercise bar is sold out, others are not", () => {
+    expect(getProduct("barra-ejercicio")!.soldOut).toBe(true);
+    expect(getProduct("soporte-bici")!.soldOut).toBeFalsy();
   });
   it("blocks dates inside a product range and global ranges", () => {
     const ranges = [
@@ -22,8 +32,8 @@ describe("booking rules", () => {
     expect(isDateBlocked(new Date(2026, 11, 25), "ganchos-x3", ranges)).toBe(true);
   });
   it("WhatsApp link goes to the workshop number with the deposit", () => {
-    const msg = buildWhatsAppMessage({ productName: "Parrilla", date: new Date(2026, 11, 10), delivery: "retiro", price: 380000, depositPercent: 30 });
-    expect(msg).toContain("114.000");
+    const msg = buildWhatsAppMessage({ productName: "Parrilla", date: new Date(2026, 11, 10), delivery: "retiro", price: 180000, depositPercent: 20 });
+    expect(msg).toContain("36.000");
     expect(whatsappUrl(msg).startsWith("https://wa.me/5491165961753?text=")).toBe(true);
   });
 });

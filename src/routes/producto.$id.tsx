@@ -72,6 +72,17 @@ function ProductPage() {
           <p className="mt-6 font-display text-5xl text-fire">{formatARS(product.price)}</p>
         </div>
 
+        {product.soldOut ? (
+          <section className="plate flex flex-col items-center justify-center gap-4 rounded-md p-8 text-center">
+            <span className="rounded-sm border-2 border-primary px-4 py-2 font-display text-4xl uppercase tracking-widest text-primary">Sold out</span>
+            <p className="text-muted-foreground">Por ahora no tenemos stock de este producto. Consultanos por WhatsApp y te avisamos cuando vuelva.</p>
+            <Button asChild size="lg" className="bg-whatsapp font-bold uppercase text-whatsapp-foreground hover:bg-whatsapp/90">
+              <a href={whatsappUrl(`¡Hola Herrería Pesce! Quería saber cuándo vuelve a haber stock de: ${product.name}`)} target="_blank" rel="noreferrer">
+                <MessageCircle className="h-5 w-5" /> Consultar stock
+              </a>
+            </Button>
+          </section>
+        ) : (
         <div className="space-y-8">
           <section className="plate rounded-md p-5">
             <h2 className="text-3xl"><span className="text-primary">1.</span> Elegí la fecha</h2>
@@ -113,6 +124,7 @@ function ProductPage() {
             Confirmar reserva
           </Button>
         </div>
+        )}
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>

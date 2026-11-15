@@ -14,18 +14,19 @@ export type Product = {
   material: string;
   price: number;
   depositPercent: number;
+  soldOut?: boolean;
 };
 
 export const PRODUCTS: Product[] = [
   {
     id: "ganchos-x3",
-    name: "Set x3 ganchos colgables",
+    name: "Perchero Pared Industrial Moderno Organizador X 3 Ganchos",
     image: ganchos,
-    short: "Ganchos forjados a mano para cocina, garaje o taller.",
+    short: "Perchero de pared con 3 ganchos de hierro, ideal para entrada, cocina o taller.",
     dimensions: "12 × 5 cm c/u",
     capacity: "Hasta 15 kg c/u",
     material: "Hierro macizo 10 mm, pintura epoxi negra",
-    price: 18000,
+    price: 20000,
     depositPercent: 10,
   },
   {
@@ -36,8 +37,8 @@ export const PRODUCTS: Product[] = [
     dimensions: "90 × 60 × 100 cm",
     capacity: "Para 15 a 20 personas",
     material: "Tambor 200 L, hierro ángulo y varilla 8 mm",
-    price: 380000,
-    depositPercent: 30,
+    price: 180000,
+    depositPercent: 20,
   },
   {
     id: "soporte-bici",
@@ -58,7 +59,7 @@ export const PRODUCTS: Product[] = [
     dimensions: "Brazo 70 cm, placa 50 cm",
     capacity: "Hasta 80 kg",
     material: "Caño estructural 40×40, placa 6 mm",
-    price: 85000,
+    price: 50000,
     depositPercent: 10,
   },
   {
@@ -71,6 +72,7 @@ export const PRODUCTS: Product[] = [
     material: "Caño 1\" pared gruesa, placas 6 mm",
     price: 120000,
     depositPercent: 10,
+    soldOut: true,
   },
 ];
 
