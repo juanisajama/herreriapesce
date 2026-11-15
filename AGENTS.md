@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Products live in a static module (src/data/products.ts); only availability blocks live in the database — keeps the catalog editable without a backend.
+- Admin writes go through server functions gated by an encrypted shared-password session; the public can only read blocked ranges — no per-user accounts needed.
