@@ -16,7 +16,10 @@ export const Route = createFileRoute("/catalogo")({
 });
 
 function Catalogo() {
-  const sortedProducts = [...PRODUCTS].sort((a, b) => b.price - a.price);
+  const sortedProducts = [...PRODUCTS].sort((a, b) => {
+    if (a.soldOut !== b.soldOut) return a.soldOut ? 1 : -1;
+    return b.price - a.price;
+  });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14">
