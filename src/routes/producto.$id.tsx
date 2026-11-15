@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { ProductReviewsPreview } from "@/components/ProductReviewsPreview";
 
 export const Route = createFileRoute("/producto/$id")({
   loader: ({ params }) => {
@@ -199,6 +200,7 @@ function ProductPage() {
           </div>
         )}
       </div>
+      <ProductReviewsPreview />
     </div>
   );
 }

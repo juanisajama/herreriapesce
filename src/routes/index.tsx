@@ -3,6 +3,7 @@ import { Hammer, CalendarCheck, MessageCircle } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { PRODUCTS } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import { ReviewsSection } from "@/components/ReviewsSection";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -31,12 +32,23 @@ function Index() {
           <p className="mt-6 max-w-lg text-lg text-muted-foreground">
             Parrillas, soportes y accesorios hechos para durar. Elegí tu producto, reservá la fecha y cerrá por WhatsApp.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="bg-fire font-bold uppercase text-primary-foreground shadow-fire">
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="h-14 bg-fire px-8 text-base font-bold uppercase text-primary-foreground shadow-fire transition-transform hover:scale-105 md:px-10 md:text-lg"
+            >
               <Link to="/catalogo">Ver catálogo</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="font-bold uppercase">
-              <a href="https://wa.me/5491165961753" target="_blank" rel="noreferrer">Consultar</a>
+            <Button
+              asChild
+              size="lg"
+              className="h-14 bg-whatsapp px-8 text-base font-bold uppercase text-whatsapp-foreground shadow-lg transition-transform hover:scale-105 hover:bg-whatsapp/90 md:px-10 md:text-lg"
+            >
+              <a href="https://wa.me/5491165961753" target="_blank" rel="noreferrer">
+                <MessageCircle aria-hidden="true" />
+                Consultar
+              </a>
             </Button>
           </div>
         </div>
@@ -56,6 +68,8 @@ function Index() {
           </div>
         ))}
       </section>
+
+      <ReviewsSection />
 
       <section className="mx-auto max-w-6xl px-4">
         <div className="mb-8 flex items-end justify-between">
