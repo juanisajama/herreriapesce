@@ -6,9 +6,19 @@ import barra from "@/assets/barranew.jfif";
 import mensulas from "@/assets/Gemini_Generated_Image_mo5r6pmo5r6pmo5r.jfif";
 import mesaRatona from "@/assets/Gemini_Generated_Image_v5lapnv5lapnv5la.jfif";
 
+export const PRODUCT_CATEGORIES = [
+  "Parrillas y Fogoneros",
+  "Fitness",
+  "Hogar e Industrial",
+] as const;
+
+export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
+export type ProductCategoryFilter = ProductCategory | "all";
+
 export type Product = {
   id: string;
   name: string;
+  category: ProductCategory;
   image: string;
   short: string;
   dimensions: string;
@@ -24,6 +34,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "ganchos-x3",
     name: "Perchero Pared Industrial Moderno Organizador X 3 Ganchos",
+    category: "Hogar e Industrial",
     image: ganchos,
     short: "Perchero de pared con 3 ganchos de hierro, ideal para entrada, cocina o taller.",
     dimensions: "12 × 5 cm c/u",
@@ -36,6 +47,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "parrilla-chulengo",
     name: "Parrilla tambor chulengo",
+    category: "Parrillas y Fogoneros",
     image: chulengo,
     short: "Chulengo de tambor con tapa, parrilla y patas reforzadas.",
     dimensions: "120 × 60 × 120 cm",
@@ -48,6 +60,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "soporte-bici",
     name: "Soporte bici pared",
+    category: "Fitness",
     image: bici,
     short: "Colgá tu bici en la pared y ganá espacio.",
     dimensions: "45 × 12 cm",
@@ -60,6 +73,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "soporte-bolsa-box",
     name: "Soporte bolsa box pared",
+    category: "Fitness",
     image: box,
     short: "Brazo reforzado para bolsa de boxeo, con cadena incluida.",
     dimensions: "Brazo 70 cm, placa 50 cm",
@@ -72,6 +86,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "barra-ejercicio",
     name: "Barra ejercicio rack pared",
+    category: "Fitness",
     image: barra,
     short: "Barra de dominadas para pared con agarres múltiples.",
     dimensions: "120 × 60 cm",
@@ -85,6 +100,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "mensulas-estante-x2",
     name: "Ménsulas de hierro para estante x2",
+    category: "Hogar e Industrial",
     image: mensulas,
     short: "Par de ménsulas de hierro fabricadas a medida y por pedido para tu estante.",
     dimensions: "A medida, según pedido",
@@ -97,6 +113,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "mesa-ratona-hierro",
     name: "Mesa ratona de hierro",
+    category: "Hogar e Industrial",
     image: mesaRatona,
     short: "Mesa ratona de diseño industrial, sólida y firme, con tapa de acero reforzada y acabado epoxi al horno.",
     dimensions: "80 cm (ancho) × 50 cm (prof.) × 42 cm (alto)",
@@ -107,6 +124,27 @@ export const PRODUCTS: Product[] = [
     depositPercent: 10,
   },
 ];
+
+function normalizeSearchText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+export function filterProducts(
+  products: readonly Product[],
+  searchTerm: string,
+  category: ProductCategoryFilter,
+) {
+  const query = normalizeSearchText(searchTerm.trim());
+
+  return products.filter((product) => {
+    const matchesCategory = category === "all" || product.category === category;
+    const searchableText = normalizeSearchText(`${product.name} ${product.short}`);
+    return matchesCategory && searchableText.includes(query);
+  });
+}
 
 export const getProduct = (id: string) => PRODUCTS.find((p) => p.id === id);
 
