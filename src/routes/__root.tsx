@@ -77,17 +77,23 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    // Replace these placeholders with the app's name and description when first building the app.
-    // Each content route, / included, must still set its own head(). Never add og:image or
-    // twitter:image here: every page without its own would inherit the root's preview image.
+    // Each content route sets its own canonical URL and social preview image.
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Herrería Pesce · Herrería artesanal en San Martín" },
-      { name: "description", content: "Parrillas, soportes y accesorios de hierro hechos a mano en San Martín, Buenos Aires." },
+      { title: "Herrería Pesce | Parrillas Tambor y Fogoneros en San Martín" },
+      {
+        name: "description",
+        content:
+          "Parrillas tambor, chulengos, fogoneros y herrería industrial a medida en San Martín, Buenos Aires. Envíos a GBA y CABA.",
+      },
       { name: "author", content: "Herrería Pesce" },
-      { property: "og:title", content: "Herrería Pesce" },
-      { property: "og:description", content: "Herrería artesanal en San Martín, Buenos Aires." },
+      { property: "og:title", content: "Parrillas Tambor y Fogoneros | Fabricación Propia" },
+      {
+        property: "og:description",
+        content:
+          "Parrillas tambor, chulengos, fogoneros y herrería industrial a medida en San Martín. Fabricación propia y envíos a GBA y CABA.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

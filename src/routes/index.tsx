@@ -5,16 +5,16 @@ import { PRODUCTS } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { Button } from "@/components/ui/button";
+import { createSeoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Herrería Pesce · Hierro forjado a mano en San Martín" },
-      { name: "description", content: "Parrillas chulengo, soportes de pared y accesorios de hierro artesanales. Reservá tu fecha y confirmá por WhatsApp." },
-      { property: "og:title", content: "Herrería Pesce · Hierro forjado a mano" },
-      { property: "og:description", content: "Parrillas, soportes y accesorios de hierro hechos en San Martín, Buenos Aires." },
-    ],
-  }),
+  head: () =>
+    createSeoHead({
+      title: "Parrillas Tambor y Fogoneros | Fabricación Propia | Herrería Pesce",
+      description:
+        "Fabricamos parrillas tambor, chulengos, fogoneros y herrería industrial a medida en San Martín, Buenos Aires. Envíos a GBA y CABA.",
+      path: "/",
+    }),
   component: Index,
 });
 

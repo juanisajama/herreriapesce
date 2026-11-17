@@ -15,26 +15,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { ProductReviewsPreview } from "@/components/ProductReviewsPreview";
+import { createSeoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/producto/$id")({
   loader: ({ params }) => {
     const product = getProduct(params.id);
     if (!product) throw notFound();
-    return { name: product.name, short: product.short };
+    return { id: product.id, name: product.name, short: product.short, image: product.image };
   },
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          { title: `${loaderData.name} · Herrería Pesce` },
-          {
-            name: "description",
-            content: `${loaderData.short} Consultá disponibilidad y coordiná por WhatsApp.`,
-          },
-          { property: "og:title", content: `${loaderData.name} · Herrería Pesce` },
-          { property: "og:description", content: loaderData.short },
-        ]
-      : [{ title: "Producto · Herrería Pesce" }, { name: "robots", content: "noindex" }],
-  }),
+  head: ({ loaderData }) =>
+    loaderData
+      ? createSeoHead({
+          title: `${loaderData.name} | Herrería Pesce en San Martín`,
+          description: `${loaderData.short} Fabricación artesanal en San Martín, Buenos Aires. Consultá disponibilidad y envíos a GBA y CABA.`,
+          path: `/producto/${loaderData.id}`,
+          image: loaderData.image,
+          imageAlt: `${loaderData.name} fabricado por Herrería Pesce`,
+        })
+      : {
+          meta: [{ title: "Producto | Herrería Pesce" }, { name: "robots", content: "noindex" }],
+        },
   notFoundComponent: () => (
     <div className="mx-auto max-w-xl px-4 py-24 text-center">
       <h1 className="text-5xl">Producto no encontrado</h1>

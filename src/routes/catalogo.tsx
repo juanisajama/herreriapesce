@@ -2,16 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PRODUCTS } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import whatsappLogo from "@/assets/6c784972cbf5806215d46fbda8b0c46a-removebg-preview.png";
+import { createSeoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/catalogo")({
-  head: () => ({
-    meta: [
-      { title: "Catálogo · Herrería Pesce" },
-      { name: "description", content: "Ganchos, parrilla chulengo, soportes de bici y bolsa de box, barra de ejercicio. Medidas, capacidad, precio y seña." },
-      { property: "og:title", content: "Catálogo · Herrería Pesce" },
-      { property: "og:description", content: "Productos de herrería artesanal con medidas, capacidad y precio." },
-    ],
-  }),
+  head: () =>
+    createSeoHead({
+      title: "Catálogo de Parrillas, Chulengos y Herrería | Herrería Pesce",
+      description:
+        "Conocé nuestras parrillas tambor, chulengos, fogoneros y productos de herrería artesanal. Fabricación en San Martín, Buenos Aires, con envíos a GBA y CABA.",
+      path: "/catalogo",
+    }),
   component: Catalogo,
 });
 
