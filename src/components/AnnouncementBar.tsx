@@ -2,7 +2,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 
 const ANNOUNCEMENT_MESSAGE =
-  "🔥 Stock disponible para entrega inmediata esta semana | Envíos a CABA y GBA";
+  "🔥 ¡50% de descuento en toda la tienda! Aprovechá la promo en todos nuestros productos.";
 
 export function AnnouncementBar() {
   const [isVisible, setIsVisible] = useState(true);
