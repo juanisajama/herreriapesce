@@ -57,7 +57,7 @@ function Login() {
         <h1 className="text-4xl">Panel del taller</h1>
         <Input name="password" type="password" placeholder="Contraseña" autoComplete="current-password" required />
         {error && <p className="text-sm text-destructive">Contraseña incorrecta</p>}
-        <Button type="submit" disabled={busy} className="w-full bg-fire font-bold uppercase text-primary-foreground">Entrar</Button>
+        <Button type="submit" disabled={busy} className="w-full bg-fire font-bold uppercase text-primary-foreground hover:bg-primary-hover">Entrar</Button>
       </form>
     </div>
   );
@@ -118,7 +118,7 @@ function Panel() {
           </Select>
           <Calendar mode="range" locale={es} selected={range} onSelect={setRange} className="mx-auto rounded-md border border-border bg-card p-3 pointer-events-auto [--cell-size:2.4rem]" />
           <Input placeholder="Motivo (opcional): sin stock, taller lleno…" value={reason} onChange={(e) => setReason(e.target.value)} maxLength={200} />
-          <Button disabled={!range?.from || busy} onClick={save} className="w-full bg-fire font-bold uppercase text-primary-foreground">
+          <Button disabled={!range?.from || busy} onClick={save} className="w-full bg-fire font-bold uppercase text-primary-foreground hover:bg-primary-hover">
             Bloquear rango
           </Button>
         </section>

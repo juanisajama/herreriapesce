@@ -36,18 +36,18 @@ function ReviewCard({
   };
 }) {
   return (
-    <article className="plate flex h-full flex-col rounded-md p-5">
+    <article className="plate flex h-full flex-col rounded-md p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-3xl tracking-wide text-fire">
+          <h3 className="text-2xl tracking-wide text-fire">
             {review.first_name} {review.last_name}
           </h3>
-          <RatingStars rating={review.rating} />
+          <RatingStars rating={review.rating} size="h-4 w-4" />
         </div>
         <MessageSquareQuote aria-hidden="true" className="h-5 w-5 shrink-0 text-primary" />
       </div>
       {review.comment && (
-        <p className="mt-4 border-l-2 border-primary pl-3 text-base font-semibold leading-relaxed text-foreground">
+        <p className="mt-3 border-l-2 border-primary pl-3 text-sm font-semibold leading-relaxed text-foreground">
           “{review.comment}”
         </p>
       )}
@@ -107,13 +107,13 @@ export function ReviewsSection() {
   }
 
   return (
-    <section id="reviews" className="mx-auto max-w-6xl px-4 py-16">
-      <div className="mb-8 flex items-end justify-between gap-4">
+    <section id="reviews" className="mx-auto max-w-5xl px-4 py-10 md:py-12">
+      <div className="mb-6 flex items-end justify-between gap-4">
         <div>
-          <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-primary">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-primary">
             Experiencias
           </p>
-          <h2 className="text-5xl">Reseñas</h2>
+          <h2 className="text-4xl">Reseñas</h2>
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <DropdownMenu>
@@ -156,7 +156,7 @@ export function ReviewsSection() {
             <DialogTrigger asChild>
               <Button
                 size="sm"
-                className="bg-fire font-bold uppercase text-primary-foreground shadow-fire"
+                className="bg-fire font-bold uppercase text-primary-foreground shadow-fire hover:bg-primary-hover"
               >
                 <Plus aria-hidden="true" />
                 <span className="hidden sm:inline">Dejar reseña</span>
@@ -209,8 +209,8 @@ export function ReviewsSection() {
                         />
                         <label
                           htmlFor={`review-rating-${value}`}
-                          className={`inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-md transition-colors hover:text-primary peer-focus-visible:ring-2 peer-focus-visible:ring-ring ${
-                            Number(rating) >= value ? "text-primary" : "text-steel"
+                          className={`inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-md transition-colors hover:text-gold peer-focus-visible:ring-2 peer-focus-visible:ring-ring ${
+                            Number(rating) >= value ? "text-gold" : "text-steel"
                           }`}
                         >
                           <Star aria-hidden="true" className="h-8 w-8 fill-current" />
@@ -226,7 +226,7 @@ export function ReviewsSection() {
                   <Button
                     type="submit"
                     disabled={busy || !rating}
-                    className="bg-fire font-bold uppercase text-primary-foreground"
+                    className="bg-fire font-bold uppercase text-primary-foreground hover:bg-primary-hover"
                   >
                     {busy ? "Guardando..." : "Enviar reseña"}
                   </Button>
@@ -237,13 +237,13 @@ export function ReviewsSection() {
         </div>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-[0.8fr_2.2fr]">
-        <div className="plate flex flex-col justify-center rounded-md p-6">
-          <p className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+      <div className="grid gap-4 lg:grid-cols-[0.8fr_2.2fr]">
+        <div className="plate flex flex-col justify-center rounded-md p-5">
+          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Puntuación media
           </p>
           <div className="mt-2 flex items-center gap-3">
-            <span className="font-display text-6xl text-fire">
+            <span className="font-display text-5xl text-fire">
               {average.toLocaleString("es-AR", {
                 minimumFractionDigits: 1,
                 maximumFractionDigits: 1,
@@ -251,13 +251,13 @@ export function ReviewsSection() {
             </span>
             <span className="text-muted-foreground">/ 5</span>
           </div>
-          <RatingStars rating={average} size="h-5 w-5" />
-          <p className="mt-2 text-sm text-muted-foreground">
+          <RatingStars rating={average} size="h-4 w-4" />
+          <p className="mt-2 text-xs text-muted-foreground">
             ({allReviews.length} {allReviews.length === 1 ? "reseña" : "reseñas"})
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {initialReviews.map((review) => (
             <ReviewCard key={review.id} review={review} />
           ))}

@@ -86,7 +86,10 @@ function ProductPage() {
             alt={product.name}
             width={1200}
             height={896}
-            className="w-full rounded-md border border-border object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            className="w-full rounded-md border border-border bg-card p-1 object-cover"
           />
           <h1 className="mt-6 text-5xl">{product.name}</h1>
           <p className="text-muted-foreground">{product.short}</p>
@@ -118,7 +121,7 @@ function ProductPage() {
             <Button
               asChild
               size="lg"
-              className="bg-whatsapp font-bold uppercase text-whatsapp-foreground hover:bg-whatsapp/90"
+              className="bg-whatsapp font-bold uppercase text-whatsapp-foreground hover:bg-whatsapp-hover"
             >
               <a
                 href={whatsappUrl(
@@ -146,7 +149,7 @@ function ProductPage() {
                       className={cn(
                         "flex items-center gap-3 rounded-md border p-4 text-left transition",
                         delivery === m
-                          ? "border-primary bg-primary/10"
+                          ? "border-gold bg-primary/10"
                           : "border-border hover:border-steel",
                       )}
                     >
@@ -182,7 +185,7 @@ function ProductPage() {
               <Button
                 asChild
                 size="lg"
-                className="w-full bg-whatsapp py-6 text-lg font-bold uppercase text-whatsapp-foreground hover:bg-whatsapp/90"
+                className="w-full bg-whatsapp py-6 text-lg font-bold uppercase text-whatsapp-foreground hover:bg-whatsapp-hover"
               >
                 <a
                   href={inquiryUrl}

@@ -16,7 +16,7 @@ export function RatingStars({ rating, size = "h-4 w-4" }: { rating: number; size
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${fill * 100}%` }}
             >
-              <Star aria-hidden="true" className={`${size} fill-primary text-primary`} />
+              <Star aria-hidden="true" className={`${size} fill-gold text-gold`} />
             </span>
           </span>
         );

@@ -4,13 +4,14 @@ import hero from "@/assets/hero.jpg";
 import { PRODUCTS } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { ReviewsSection } from "@/components/ReviewsSection";
+import { CustomWorkSection } from "@/components/CustomWorkSection";
 import { Button } from "@/components/ui/button";
 import { createSeoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () =>
     createSeoHead({
-      title: "Parrillas Tambor y Fogoneros | Fabricación Propia | Herrería Pesce",
+      title: "Herrería Pesce | Tienda de Parrillas y Herrería a Medida",
       description:
         "Fabricamos parrillas tambor, chulengos, fogoneros y herrería industrial a medida en San Martín, Buenos Aires. Envíos a GBA y CABA.",
       path: "/",
@@ -22,7 +23,16 @@ function Index() {
   return (
     <>
       <section className="relative isolate overflow-hidden">
-        <img src={hero} alt="Herrero forjando hierro al rojo en el yunque" width={1920} height={1088} className="absolute inset-0 -z-10 h-full w-full object-cover" />
+        <img
+          src={hero}
+          alt="Herrero forjando hierro al rojo en el yunque"
+          width={1920}
+          height={1088}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/80 to-background/20" />
         <div className="mx-auto max-w-6xl px-4 py-28 md:py-40">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-primary">San Martín · Buenos Aires</p>
@@ -36,14 +46,14 @@ function Index() {
             <Button
               asChild
               size="lg"
-              className="h-14 bg-fire px-8 text-base font-bold uppercase text-primary-foreground shadow-fire transition-transform hover:scale-105 md:px-10 md:text-lg"
+              className="h-14 bg-fire px-8 text-base font-bold uppercase text-primary-foreground shadow-fire transition hover:bg-primary-hover hover:scale-105 md:px-10 md:text-lg"
             >
               <Link to="/catalogo">Ver catálogo</Link>
             </Button>
             <Button
               asChild
               size="lg"
-              className="h-14 bg-whatsapp px-8 text-base font-bold uppercase text-whatsapp-foreground shadow-lg transition-transform hover:scale-105 hover:bg-whatsapp/90 md:px-10 md:text-lg"
+              className="h-14 bg-whatsapp px-8 text-base font-bold uppercase text-whatsapp-foreground shadow-lg transition-transform hover:scale-105 hover:bg-whatsapp-hover md:px-10 md:text-lg"
             >
               <a href="https://wa.me/5491165961753" target="_blank" rel="noreferrer">
                 <MessageCircle aria-hidden="true" />
@@ -69,8 +79,6 @@ function Index() {
         ))}
       </section>
 
-      <ReviewsSection />
-
       <section className="mx-auto max-w-6xl px-4">
         <div className="mb-8 flex items-end justify-between">
           <h2 className="text-5xl">Destacados</h2>
@@ -80,6 +88,9 @@ function Index() {
           {PRODUCTS.slice(0, 3).map((p) => <ProductCard key={p.id} product={p} />)}
         </div>
       </section>
+
+      <CustomWorkSection />
+      <ReviewsSection />
     </>
   );
 }

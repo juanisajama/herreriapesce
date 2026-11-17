@@ -1,8 +1,13 @@
 import ganchos from "@/assets/ganchosnew.jfif";
+import ganchosAlt from "@/assets/ganchos.jpg";
 import chulengo from "@/assets/chulengonew.jfif";
+import chulengoAlt from "@/assets/chulengo.jpg";
 import bici from "@/assets/bicinew.jfif";
+import biciAlt from "@/assets/soporte-bici.jpg";
 import box from "@/assets/boxnew.jfif";
+import boxAlt from "@/assets/soporte-box.jpg";
 import barra from "@/assets/barranew.jfif";
+import barraAlt from "@/assets/barra.jpg";
 import mensulas from "@/assets/Gemini_Generated_Image_mo5r6pmo5r6pmo5r.jfif";
 import mesaRatona from "@/assets/Gemini_Generated_Image_v5lapnv5lapnv5la.jfif";
 
@@ -15,15 +20,24 @@ export const PRODUCT_CATEGORIES = [
 export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
 export type ProductCategoryFilter = ProductCategory | "all";
 
+export type ProductVariant = {
+  id: string;
+  name: string;
+  price: number;
+};
+
 export type Product = {
   id: string;
   name: string;
   category: ProductCategory;
   image: string;
+  gallery?: string[];
   short: string;
   dimensions: string;
   capacity: string;
   material: string;
+  finish?: string;
+  variants?: ProductVariant[];
   price: number;
   discountPercent: number;
   depositPercent: number;
@@ -36,10 +50,12 @@ export const PRODUCTS: Product[] = [
     name: "Perchero Pared Industrial Moderno Organizador X 3 Ganchos",
     category: "Hogar e Industrial",
     image: ganchos,
+    gallery: [ganchos, ganchosAlt],
     short: "Perchero de pared con 3 ganchos de hierro, ideal para entrada, cocina o taller.",
     dimensions: "12 × 5 cm c/u",
     capacity: "Hasta 15 kg c/u",
     material: "Hierro macizo 10 mm, pintura epoxi negra",
+    finish: "Pintura epoxi negra",
     price: 20000,
     discountPercent: 50,
     depositPercent: 10,
@@ -49,6 +65,7 @@ export const PRODUCTS: Product[] = [
     name: "Parrilla tambor chulengo",
     category: "Parrillas y Fogoneros",
     image: chulengo,
+    gallery: [chulengo, chulengoAlt],
     short: "Chulengo de tambor con tapa, parrilla y patas reforzadas.",
     dimensions: "120 × 60 × 120 cm",
     capacity: "Para 15 a 20 personas",
@@ -62,6 +79,7 @@ export const PRODUCTS: Product[] = [
     name: "Soporte bici pared",
     category: "Fitness",
     image: bici,
+    gallery: [bici, biciAlt],
     short: "Colgá tu bici en la pared y ganá espacio.",
     dimensions: "45 × 12 cm",
     capacity: "Hasta 25 kg",
@@ -75,6 +93,7 @@ export const PRODUCTS: Product[] = [
     name: "Soporte bolsa box pared",
     category: "Fitness",
     image: box,
+    gallery: [box, boxAlt],
     short: "Brazo reforzado para bolsa de boxeo, con cadena incluida.",
     dimensions: "Brazo 70 cm, placa 50 cm",
     capacity: "Hasta 80 kg",
@@ -88,6 +107,7 @@ export const PRODUCTS: Product[] = [
     name: "Barra ejercicio rack pared",
     category: "Fitness",
     image: barra,
+    gallery: [barra, barraAlt],
     short: "Barra de dominadas para pared con agarres múltiples.",
     dimensions: "120 × 60 cm",
     capacity: "Hasta 150 kg",
@@ -119,6 +139,7 @@ export const PRODUCTS: Product[] = [
     dimensions: "80 cm (ancho) × 50 cm (prof.) × 42 cm (alto)",
     capacity: "Estructura sólida y firme",
     material: "Hierro estructural 20/20 de 1 mm, tapa de chapa de acero reforzada de 1,2 mm, pintura epoxi al horno y patas con regatones.",
+    finish: "Pintura epoxi al horno",
     price: 200000,
     discountPercent: 50,
     depositPercent: 10,

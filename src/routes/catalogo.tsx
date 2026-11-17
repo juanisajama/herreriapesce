@@ -42,6 +42,7 @@ function Catalogo() {
           alt="WhatsApp"
           width={500}
           height={500}
+          decoding="async"
           className="inline-block h-[1em] w-[1em] align-[-0.15em] object-contain"
         />
       </p>
@@ -80,7 +81,7 @@ function Catalogo() {
                 onClick={() => setCategory(item.value)}
                 className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   isSelected
-                    ? "border-fire bg-fire text-primary-foreground"
+                    ? "border-gold bg-fire text-primary-foreground hover:bg-primary-hover"
                     : "border-border bg-card text-foreground hover:border-primary hover:text-primary"
                 }`}
               >
@@ -96,12 +97,12 @@ function Catalogo() {
       </p>
       {filteredProducts.length > 0 ? (
         <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product, index) => (
             <div
               key={product.id}
               className="animate-in fade-in-0 slide-in-from-bottom-2 duration-300"
             >
-              <ProductCard product={product} />
+              <ProductCard product={product} priority={index === 0} />
             </div>
           ))}
         </div>
